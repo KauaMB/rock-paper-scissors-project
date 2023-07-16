@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+  <link rel="icon" href="images/icon.png">
+  <link rel="stylesheet" href="jokenpo.css">
+  <title>Rock paper scissors</title>
+</head>
+
+<body>
+
+  <div class="game">
+
+    <p class="text">
+      ROCK PAPER SCISSORS
+    </p>
+
+    <div class="entire-game">
+
+      <div class="player-move-div">
+
+        <button class="movement-image">
+          <img class="player-movement-image" src="" alt="">
+        </button>
+
+        <p class="js-player-movement-text"></p>
+
+      </div>
+
+      <div class="choices">
+
+        <button class="button" onclick="gameResult('rock'); playerMoveImage('rock');">
+          Rock <img class="button-image" src="images/rock-emoji.png">
+        </button>
+
+        <button class="button" onclick="gameResult('paper'); playerMoveImage('paper');">
+          Paper <img class="button-image" src="images/paper-emoji.png">
+        </button>
+
+        <button class="button" onclick="gameResult('scissors'); playerMoveImage('scissors');">
+          Scissors <img class="button-image" src="images/scissors-emoji.png">
+        </button>
+
+        <button class="button" onclick="
+          score.wins = 0;
+          score.losses = 0;
+          score.ties = 0;
+          localStorage.removeItem('score')
+          updateGameScore()">
+          Reset Score
+        </button>
+
+      </div>
+
+      <div class="computer-move-div">
+
+        <button class="movement-image">
+          <img class="computer-movement-image" src="" alt="">
+        </button>
+
+        <p class="js-computer-movement-text"></p>
+
+      </div>
+
+    </div>
+
+    <p class="js-result"></p>
+
+    <p class="js-score"></p>
+
+
+  </div>
+
+  <script>
+
+    let score = JSON.parse(localStorage.getItem('score')) || {
+      wins: 0,
+      losses: 0,
+      ties: 0
+    };
+
+    updateGameScore();
+
+    function gameResult(playerMove) {
+      computerMove = computerMovement();
+
+      if (playerMove === 'rock') {
+        if (playerMove === computerMove) {
+          result = 'Tie!!!'
+        }
+        else if (computerMove === 'paper') {
+          result = 'You lose!!!';
+        }
+        else {
+          result = 'You win!!!';
+        }
+      }
+
+      else if (playerMove === 'paper') {
+        if (playerMove === computerMove) {
+          result = 'Tie!!!'
+        }
+        else if (computerMove === 'scissors') {
+          result = 'You lose!!!';
+        }
+        else {
+          result = 'You win!!!';
+        }
+      }
+
+      else {
+        if (playerMove === computerMove) {
+          result = 'Tie!!!'
+        }
+        else if (computerMove === 'rock') {
+          result = 'You lose!!!';
+        }
+        else {
+          result = 'You win!!!';
+        }
+      }
+
+      if (result === 'Tie!!!') {
+        score.ties++;
+      }
+      else if (result === 'You win!!!') {
+        score.wins++;
+      }
+      else {
+        score.losses++;
+      }
+
+      localStorage.setItem('score', JSON.stringify(score));
+
+      updateGameScore();
+      resultDisplay();
+      computerMoveImage(computerMove);
+
+      // alert(`You picked ${playerMove}, Computer picked ${computerMove}. ${result}
+      // \nScore: Wins: ${score.wins} Losses: ${score.losses} Ties; ${score.ties}`);
+    }
+
+    function updateGameScore() {
+      let scoreElement = document.querySelector('.js-score');
+      scoreElement.innerHTML = `Wins: ${score.wins} Losses: \n
+      ${score.losses} Ties; ${score.ties}`;
+
+      document.querySelector('.player-movement-image').src = '';
+      document.querySelector('.computer-movement-image').src = '';
+
+      document.querySelector('.js-player-movement-text').innerHTML = '';
+      document.querySelector('.js-computer-movement-text').innerHTML = '';
+    }
+
+    function resultDisplay() {
+      document.querySelector('.js-result').innerHTML = result;
+    }
+
+
+    function playerMoveImage(playerMove) {
+      if (playerMove === 'rock') {
+        let imgPath = 'images/rock-emoji.png';
+        document.querySelector('.player-movement-image').src = imgPath;
+
+        document.querySelector('.js-player-movement-text').innerHTML
+          = 'Your move: ROCK';
+      }
+      else if (playerMove === 'scissors') {
+        let imgPath = 'images/scissors-emoji.png';
+        document.querySelector('.player-movement-image').src = imgPath;
+
+        document.querySelector('.js-player-movement-text').innerHTML
+          = 'Your move: SCISSORS';
+      }
+      else {
+        let imgPath = 'images/paper-emoji.png';
+        document.querySelector('.player-movement-image').src = imgPath;
+
+        document.querySelector('.js-player-movement-text').innerHTML
+          = 'Your move: PAPER';
+      }
+    }
+
+    function computerMoveImage(computerMove) {
+      if (computerMove === 'rock') {
+        let imgPath = 'images/rock-emoji.png';
+        document.querySelector('.computer-movement-image').src = imgPath;
+
+        document.querySelector('.js-computer-movement-text').innerHTML
+          = 'Computer move: ROCK';
+      }
+      else if (computerMove === 'scissors') {
+        let imgPath = 'images/scissors-emoji.png';
+        document.querySelector('.computer-movement-image').src = imgPath;
+
+        document.querySelector('.js-computer-movement-text').innerHTML
+          = 'Computer move: SCISSORS';
+      }
+      else {
+        let imgPath = 'images/paper-emoji.png';
+        document.querySelector('.computer-movement-image').src = imgPath;
+
+        document.querySelector('.js-computer-movement-text').innerHTML
+          = 'Computer move: PAPER';
+      }
+    }
+
+    function computerMovement() {
+      const randomNumber = Math.random();
+
+      console.log(randomNumber);
+
+      if (randomNumber >= 0 && randomNumber < 1 / 3) {
+        computerMove = 'rock';
+      }
+      else if (randomNumber >= 1 / 3 && randomNumber < 2 / 3) {
+        computerMove = 'paper';
+      }
+      else {
+        computerMove = 'scissors';
+      }
+
+      return computerMove;
+    }
+
+
+  </script>
+
+</body>
+
+</html>

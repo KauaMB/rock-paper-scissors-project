@@ -1,0 +1,105 @@
+body {
+  font-family: lilita one;
+  background-color: rgb(41, 37, 37);
+}
+
+.text {
+  color: rgb(255, 255, 255);
+  font-size: 40px;
+}
+
+.game {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  height: 600px;
+}
+
+.entire-game {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+}
+
+.choices {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border-width: 1px;
+  border-color: rgb(240, 241, 126);
+  border-style: solid;
+  border-radius: 5px;
+
+  background-color: rgb(26, 23, 23);
+  
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.button {
+  font-family: lilita one;
+
+  background-color: rgb(240, 241, 126);
+  color: rgb(41, 37, 37);
+
+  border-radius: 5px;
+  border: none;
+
+  font-size: 17px;
+
+  cursor: pointer;
+
+  margin-left: 10px;
+  margin-right: 10px;
+  padding: 10px 12px 10px 12px;
+
+  transition: background-color 0.15s;
+}
+
+.button:hover {
+  background-color: rgb(186, 187, 105);
+}
+
+.button:active {
+  background-color: rgb(142, 143, 82);
+}
+
+.button-image {
+  height: 100px;
+}
+
+.js-score {
+  color: rgb(255, 255, 255);
+  font-size: 25px;
+}
+
+.js-result {
+  color: rgb(255, 255, 255);
+  font-size: 40px;
+}
+
+.movement-image {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+}
+
+.player-move-div,
+.computer-move-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.js-computer-movement-text,
+.js-player-movement-text {
+  color: rgb(255, 255, 255);
+  font-size: 25px;
+}
