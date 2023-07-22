@@ -10,6 +10,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
   <link rel="icon" href="images/icon.png">
   <link rel="stylesheet" href="jokenpo.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
   <title>Rock paper scissors</title>
 </head>
 
@@ -34,6 +36,10 @@
       </div>
 
       <div class="choices">
+
+        <button class="button autoplay" onclick="handleButtonTextChange()">
+          Autoplay
+        </button>
 
         <button class="button" onclick="gameResult('rock'); playerMoveImage('rock');">
           Rock <img class="button-image" src="images/rock-emoji.png">

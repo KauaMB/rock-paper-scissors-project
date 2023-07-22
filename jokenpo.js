@@ -6,6 +6,25 @@ let score = JSON.parse(localStorage.getItem('score')) || {
 
 updateGameScore();
 
+
+function autoplayRandomizer() {
+  let randomNumber = Math.random();
+  let randomMove = '';
+
+  if (randomNumber >= 0 && randomNumber < 1 / 3) {
+    randomMove = 'rock';
+  }
+  else if (randomNumber >= 1 / 3 && randomNumber < 2 / 3) {
+    randomMove = 'paper';
+  }
+  else {
+    randomMove = 'scissors';
+  }
+
+  gameResult(randomMove);
+  playerMoveImage(randomMove);
+}
+
 function gameResult(playerMove) {
   computerMove = computerMovement();
 
@@ -148,5 +167,26 @@ function computerMovement() {
   }
 
   return computerMove;
+}
+
+let intervalID;
+
+
+function handleButtonTextChange() {
+  let autoplayButton = $('.autoplay')
+
+  
+  if (autoplayButton.hasClass('activated')) {
+    autoplayButton.html('Autoplay');
+    autoplayButton.removeClass('activated');
+    clearInterval(intervalID);
+  }
+  else {
+    autoplayRandomizer();
+    autoplayButton.html('Stop Auto');
+    autoplayButton.addClass('activated');
+    intervalID = setInterval(autoplayRandomizer, 1500);
+  }
+  
 }
 
